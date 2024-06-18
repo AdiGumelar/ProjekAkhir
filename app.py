@@ -14,9 +14,9 @@ app.secret_key = 'your_secret_key'
 def home():
     return render_template('index.html')
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
+@app.route('/home')
+def homepage():
+    return render_template('home.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -52,7 +52,20 @@ def register():
         else:
             db.user.insert_one({"name" : name_receive, "email": email_receive, "pw": pw_hash})
 
-    return render_template('register.html') 
+    return render_template('register.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+@app.route('/pendaftaran')
+def daftar():
+    return render_template('pendaftaran.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run("0.0.0.0", port=5000, debug=True)
