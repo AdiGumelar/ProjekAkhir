@@ -14,8 +14,8 @@ app.secret_key = 'your_secret_key'
 def home():
     return render_template('index.html')
 
-@app.route('/home')
-def homepage():
+@app.route('/homeuser')
+def homeuser():
     return render_template('home.html')
 
 @app.route('/login', methods=["GET", "POST"])
@@ -54,18 +54,74 @@ def register():
 
     return render_template('register.html')
 
+@app.route('/pengumuman')
+def pengumuman():
+    return render_template('pengumuman.html')
+
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    user_info = {
+        'profile_name': 'lailatul qur\'ani',
+        'profile_pic': 'profile_placeholder.jpeg'
+    }
+    return render_template('profile.html', user_info=user_info)
 
 @app.route('/pendaftaran')
 def daftar():
     return render_template('pendaftaran.html')
 
+#untuk mengirim data pendaftaran
+@app.route('/kirim-data', methods=["POST"])
+def kirim_data():
+    form_data = {key: request.form[key] for key in [
+        'nama_lengkap', 'nama_panggilan', 'asal_provinsi', 
+        'asal_kota', 'asal_desa', 'jenis_kelamin', 'nomor_hp'
+    ]}
+    
+    dokumen = request.files['dokumen']
+    if dokumen and allowed_file(dokumen.filename):
+        filename = secure_filename(dokumen.filename)
+        dokumen.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        form_data['dokumen'] = filename
+    else:
+        form_data['dokumen'] = None
+
+    form_data['status'] = 'menunggu'
+
+    db.pendaftaran.insert_one(form_data)
+    return redirect(url_for('daftar'))
+
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+@app.route('/homeadmin')
+def homeadmin():
+    return render_template('dashboard.html')
+
+@app.route('/datamasuk')
+def datamasuk():
+    return render_template('datamasuk.html')
+
+@app.route('/datasiswa')
+def datasiswa():
+    return render_template('datasiswa.html')
+
+@app.route('/editdokumentasi', methods=['POST'])
+def editdokumentasi():
+    if request.method == 'POST':
+        judul = request.form['judul']
+        deskripsi = request.form['deskripsi']
+        file = request.files['inputFile']
+        
+        return "Dokumentasi berhasil disimpan!"
+    return render_template('editdokumentasi.html')
+
+
+@app.route('/updateprofile', methods=["POST"])
+def updateprofile():
+    return render_template('profile.html')
 
 if __name__ == '__main__':
     app.run("0.0.0.0", port=5000, debug=True)
