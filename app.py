@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, render_template, redirect, url_for, request, session
 import hashlib
 
@@ -29,6 +30,7 @@ def login():
         findUser = db.user.find_one({"email": email_receive, "pw": pw_hash})
         
         if findUser:
+            session['user'] = email_receive
             return jsonify({"result": "success"})
         else :
             return jsonify({"result": "error"})
@@ -58,11 +60,67 @@ def register():
 def pengumuman():
     return render_template('pengumuman.html')
 
-@app.route('/profile')
+@app.route('/profile',methods=["GET", "POST"])
 def profile():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == "POST" :
+        nama_receive = request.form["nama_give"]
+        gender_receive = request.form["gender_give"]
+        alamat_receive = request.form["alamat_give"]
+        tempatLahir_receive = request.form["tempatLahir_give"]
+        tanggalLahir_receive = request.form["tanggalLahir_give"]
+       
+
+        
+
+         # Pastikan foto_give ada dalam request.files sebelum mencoba mengaksesnya
+        if 'foto_give' in request.files:
+            foto_receive = request.files["foto_give"]
+            foto_path = f"static/profile_pics/{(foto_receive.filename)}"
+            foto_receive.save(foto_path)
+        else:
+            # Jika foto_give tidak ada dalam request.files, berikan nilai default
+            foto_path = "/static/profile_pics/profile_placeholder.jpeg"
+
+        doc = {
+        "nama" : nama_receive,
+        "gender" : gender_receive,
+        "alamat" : alamat_receive,
+        "tempatLahir" : tempatLahir_receive,
+        "tanggalLahir" : tanggalLahir_receive,
+        "email" : session['user'],
+        "foto" : foto_path
+        }
+
+        profile = db.profile.find_one({"email" : session['user']})
+
+        if profile :
+            db.profile.update_one(
+                {"email": session['user']},  # Filter berdasarkan email
+                {"$set": {
+                    "nama": nama_receive,
+                    "gender": gender_receive,
+                    "alamat": alamat_receive,
+                    "tempatLahir": tempatLahir_receive,
+                    "tanggalLahir": tanggalLahir_receive,
+                    "foto" : foto_path
+                }}
+            )
+        else :
+            db.profile.insert_one(doc)
+        return jsonify({"result" : "success"})
+
+    profile = db.profile.find_one({"email" : session['user']})
+
     user_info = {
-        'profile_name': 'lailatul qur\'ani',
-        'profile_pic': 'profile_placeholder.jpeg'
+        "nama" : profile['nama'],
+        "gender" : profile['gender'],
+        "alamat" : profile['alamat'],
+        "tempatLahir" : profile['tempatLahir'],
+        "tanggalLahir" : profile['tanggalLahir'],
+        "foto" : profile['foto']
     }
     return render_template('profile.html', user_info=user_info)
 

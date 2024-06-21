@@ -62,7 +62,7 @@
             if (response["result"] === "error") {
               $("#errEmail").addClass("input-error").text("*Email atau Password Tidak Ditemukan!");
             } else {
-              window.location.replace("/");
+              window.location.href = "/homeuser";
             }
           },
         });
