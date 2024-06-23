@@ -154,12 +154,14 @@
                                             </thead>
 
                                             <tbody id="tbody-box">
+                                                {% for i, student in enumerate(students) %}
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>2024-06-19</td>
-                                                    <td class="text-start">Halloo</td>
+                                                    <td>{{ i + 1 }}</td>
+                                                    <td>{{ today_date }}</td>
+                                                    <td>{{ student['nama_lengkap'] }}</td>
                                                     <td class="text-start">Anda Diterima</td>
                                                 </tr>
+                                                {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>

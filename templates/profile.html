@@ -47,6 +47,7 @@
         margin-top: -50px;
       }
     </style>
+    
     <script>
       $(document).ready(function () {
         get_posts();
@@ -57,7 +58,7 @@
       }
 
       function submitProfile() {
-        var foto = $("#profile-image-input")[0].files[0]; // Ambil file dari input file
+        var foto = $("#profile-image-input")[0].files[0];
         var nama = $("#full-name").val();
         var gender = $("#gender").val();
         var alamat = $("#address").val();
@@ -65,7 +66,7 @@
         var tanggalLahir = $("#birthdate").val();
 
         var formData = new FormData();
-        formData.append("foto_give", foto); // Pastikan 'foto_give' sesuai dengan nama kunci yang diharapkan di server
+        formData.append("foto_give", foto);
         formData.append("nama_give", nama);
         formData.append("gender_give", gender);
         formData.append("alamat_give", alamat);
@@ -76,12 +77,11 @@
           type: "POST",
           url: "/profile",
           data: formData,
-          contentType: false, // Set contentType to false for FormData
-          processData: false, // Set processData to false for FormData
+          contentType: false,
+          processData: false,
           success: function (response) {
             if (response["result"] === "success") {
               alert("Berhasil");
-              // Lakukan tindakan lain jika perlu
             }
           },
           error: function () {
@@ -91,18 +91,14 @@
       }
 
       document.addEventListener("DOMContentLoaded", function () {
-        // Ambil nilai gender dari user_info yang diteruskan dari Flask
         var gender = "{{ user_info.gender }}";
 
         // Cari elemen select berdasarkan ID
         var genderSelect = document.getElementById("gender");
 
-        // Set nilai default berdasarkan gender dari user_info
         if (gender) {
-          // Loop melalui setiap option dalam select
           for (var i = 0; i < genderSelect.options.length; i++) {
             if (genderSelect.options[i].value === gender) {
-              // Set option yang sesuai dengan gender sebagai selected
               genderSelect.options[i].selected = true;
               break;
             }

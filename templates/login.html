@@ -61,6 +61,8 @@
           success: function (response) {
             if (response["result"] === "error") {
               $("#errEmail").addClass("input-error").text("*Email atau Password Tidak Ditemukan!");
+            } else if (response["result"] === "admin") {
+              window.location.href = "/homeadmin";
             } else {
               window.location.href = "/homeuser";
             }
@@ -68,6 +70,7 @@
         });
       }
     </script>
+
   </head>
 
   <body>

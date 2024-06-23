@@ -116,7 +116,7 @@
                 <div class="ms-auto me-3">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <button class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                            <a href="{{ url_for('logout') }}"><button class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button></a>
                         </li>
                     </ul>
                 </div>
@@ -132,7 +132,7 @@
             <p>Hai, admin</p>
         </div>
         <a href="/homeadmin"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="/datamasuk"><i class="fas fa-user"></i> Data Siswa Masuk</a>
+        <a href="/datasiswamasuk"><i class="fas fa-user"></i> Data Siswa Masuk</a>
         <a href="/datasiswa"><i class="fas fa-book"></i> Data Siswa</a>
         <a href="/editdokumentasi"><i class="fas fa-edit"></i> Edit Dokumentasi</a>
     </div>
@@ -142,19 +142,19 @@
         <h2 class="mt-4 mb-4">Edit Dokumentasi</h2>
 
         <!-- Form to edit documentation -->
-        <form>
+        <form action="/editdokumentasi" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="inputTitle">Judul Dokumentasi</label>
-                <input type="text" class="form-control" id="inputTitle" placeholder="Masukkan judul dokumentasi">
+                <input type="text" class="form-control" id="inputTitle" name="judul" placeholder="Masukkan judul dokumentasi" required>
             </div>
             <div class="form-group">
                 <label for="inputDescription">Deskripsi Dokumentasi</label>
-                <textarea class="form-control" id="inputDescription" rows="3"
-                    placeholder="Masukkan deskripsi dokumentasi"></textarea>
+                <textarea class="form-control" id="inputDescription" name="deskripsi" rows="3"
+                    placeholder="Masukkan deskripsi dokumentasi" required></textarea>
             </div>
             <div class="form-group">
                 <label for="inputFile">File Dokumentasi</label>
-                <input type="file" class="form-control-file" id="inputFile">
+                <input type="file" class="form-control-file" id="inputFile" name="inputFile" required>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>

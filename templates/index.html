@@ -304,48 +304,29 @@
   <!-- Dokumentasi -->
   <section id="dokumentasi">
     <div class="container">
-      <div class="px-4 py-5 text-center">
-        <span class="display-6 fw-bold text-body-emphasis-white border-bottom">Dokumentasi</span>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-12 mb-3">
-          <div class="card">
-            <img src="/static/wisuda1.jpeg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <div class="card-title">
-                <h4>WISUDA PURNA</h4>
+        <div class="px-4 py-5 text-center">
+            <span class="display-6 fw-bold text-body-emphasis-white border-bottom">Dokumentasi</span>
+            <div class="row">
+              {% for i, dok in enumerate(dokumentasi_list) %}
+              <div class="col-md-4 col-sm-6 mb-3">
+                  <div class="card">                            
+                      <img src="{{ dok['file_path'] }}" class="card-img-top" alt="{{ dok['judul'] }}" />
+                      <div class="card-body">
+                          <div class="card-title">
+                              <h4>{{ dok['judul'] }}</h4>
+                          </div>
+                          <p>{{ dok['deskripsi'] }}</p>
+                      </div>
+                  </div>
               </div>
-              Wisuda Siswa MTs Ma'arif Al-Utsmani tahun ajaran 2022/2023.
-            </div>
+              {% if (i + 1) % 3 == 0 %}
           </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <img src="/static/wisuda2.jpeg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <div class="card-title">
-                <h4>WISUDA PURNA</h4>
-              </div>
-              Wisuda Siswi MTs Ma'arif Al-Utsmani tahun ajaran 2022/2023.
-            </div>
+          <div class="row">
+              {% endif %}
+              {% endfor %}
           </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <img src="/static/Maulid nabi.jpeg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <div class="card-title">
-                <h4>MAULID NABI</h4>
-              </div>
-              Memperingati hari kelahiran Nabi besar Muhammad saw.
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
   <!-- End Dokumentasi -->
 
   <!-- start contact us -->

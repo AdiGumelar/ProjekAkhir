@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran</title>
+    <title>Company Profile MTs - Pendaftaran</title>
 
     <meta property="og:title" content="Company Profile MTs">
     <meta property="og:description" content="PPDB Online">
@@ -36,133 +36,53 @@
 
 <body>
     <div class="container">
-        <div class="card">
-            <div class="card-body px-5 py-5">
+        <div class="card mt-5">
+            <div class="card-body">
                 <h1 class="reg-title text-center">Pendaftaran Siswa/Siswi Baru</h1>
-
                 <form action="/kirim-data" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama-lengkap" name="nama_lengkap"
-                            placeholder="Nama Lengkap" required="">
+                        <input type="text" class="form-control" id="nama-lengkap" name="nama_lengkap" required>
                     </div>
-
                     <div class="mb-3">
                         <label for="nama-panggilan" class="form-label">Nama Panggilan</label>
-                        <input type="text" class="form-control" id="nama-panggilan" name="nama_panggilan"
-                            placeholder="Nama Panggilan" required="">
+                        <input type="text" class="form-control" id="nama-panggilan" name="nama_panggilan" required>
                     </div>
-
                     <div class="mb-3">
-                        <label for="province" class="form-label">Asal Provinsi</label>
-                        <select class="form-select select2 select2-hidden-accessible" id="province" name="asal_provinsi"
-                            onchange="fetchCities()" required="" data-select2-id="select2-data-province" tabindex="-1"
-                            aria-hidden="true">
-                            <option value="" data-select2-id="select2-data-3-aktu">-- Pilih Provinsi --</option>
-                            <option value="1">ACEH</option>
-                            <option value="2">SUMATERA UTARA</option>
-                            <option value="3">SUMATERA SELATAN</option>
-                            <option value="4">SUMATRA BARAT</option>
-                            <option value="5">BENGKULU</option>
-                            <option value="6">RIAU</option>
-                            <option value="7">KEPULAUAN RIAU</option>
-                            <option value="8">JAMBI</option>
-                            <option value="9">LAMPUNG</option>
-                            <option value="10">BANGKA BELITUNG</option>
-                            <option value="11">KALIMANTAN BARAT</option>
-                            <option value="12">KALIMANTAN TIMUR</option>
-                            <option value="13">KALIMANTAN SELATAN</option>
-                            <option value="14">KALIMANTAN TENGAH</option>
-                            <option value="15">KALIMANTAN UTARA</option>
-                            <option value="16">BANTEN</option>
-                            <option value="17">DKI JAKARTA</option>
-                            <option value="18">JAWA BARAT</option>
-                            <option value="19">JAWA TENGAH</option>
-                            <option value="20">DAERAH ISTIMEWA YOGYAKARTA</option>
-                            <option value="21">JAWA TIMUR</option>
-                            <option value="22">BALI</option>
-                            <option value="23">NUSA TENGGARA TIMUR</option>
-                            <option value="24">NUSA TENGGARA BARAT</option>
-                            <option value="25">GORONTALO</option>
-                            <option value="26">SULAWESI BARAT</option>
-                            <option value="27">SULAWESI TENGAH</option>
-                            <option value="28">SULAWESI UTARA</option>
-                            <option value="29">SULAWESI TENGGARA</option>
-                            <option value="30">SULAWESI SELATAN</option>
-                            <option value="31">MALUKU UTARA</option>
-                            <option value="32">MALUKU</option>
-                            <option value="33">PAPUA BARAT</option>
-                            <option value="34">PAPUA</option>
-                            <option value="35">PAPUA TENGAH</option>
-                            <option value="36">PAPUA PEGUNUNGAN</option>
-                            <option value="37">PAPUA SELATAN</option>
-                            <option value="38">PAPUA BARAT DAYA</option>
-                        </select>
+                        <label for="asalprovinsi" class="form-label">Asal Provinsi</label>
+                        <input type="text" class="form-control" id="asalprovinsi" name="asalprovinsi" required>
                     </div>
-
                     <div class="mb-3">
-                        <label for="city" class="form-label">Asal Kabupaten/Kota</label>
-                        <select class="form-select select2 select2-hidden-accessible" id="city" name="asal_kota"
-                            disabled="" required="" data-select2-id="select2-data-city" tabindex="-1"
-                            aria-hidden="true"></select><span
-                            class="select2 select2-container select2-container--default select2-container--disabled"
-                            dir="ltr" data-select2-id="select2-data-2-3mk6" style="width: 1198.4px;"><span
-                                class="selection"><span class="select2-selection select2-selection--single"
-                                    role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1"
-                                    aria-disabled="true" aria-labelledby="select2-city-container"
-                                    aria-controls="select2-city-container"><span class="select2-selection__rendered"
-                                        id="select2-city-container" role="textbox" aria-readonly="true"></span><span
-                                        class="select2-selection__arrow" role="presentation"><b
-                                            role="presentation"></b></span></span></span><span class="dropdown-wrapper"
-                                aria-hidden="true"></span></span>
+                        <label for="asalkota_kabupaten" class="form-label">Asal Kota/Kabupaten</label>
+                        <input type="text" class="form-control" id="asalkota_kabupaten" name="asalkota_kabupaten"
+                            required>
                     </div>
-
                     <div class="mb-3">
-                        <label for="village" class="form-label">Asal Desa/Dusun</label>
-                        <select class="form-select select2 select2-hidden-accessible" id="village" name="asal_desa"
-                            disabled="" required="" data-select2-id="select2-data-village" tabindex="-1"
-                            aria-hidden="true"></select><span
-                            class="select2 select2-container select2-container--default select2-container--disabled"
-                            dir="ltr" data-select2-id="select2-data-2-3mk6" style="width: 1198.4px;"><span
-                                class="selection"><span class="select2-selection select2-selection--single"
-                                    role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1"
-                                    aria-disabled="true" aria-labelledby="select2-village-container"
-                                    aria-controls="select2-village-container"><span class="select2-selection__rendered"
-                                        id="select2-village-container" role="textbox" aria-readonly="true"></span><span
-                                        class="select2-selection__arrow" role="presentation"><b
-                                            role="presentation"></b></span></span></span><span class="dropdown-wrapper"
-                                aria-hidden="true"></span></span>
+                        <label for="asaldusun_desa" class="form-label">Asal Dusun/Desa</label>
+                        <input type="text" class="form-control" id="asaldusun_desa" name="asaldusun_desa" required>
                     </div>
-
                     <div class="mb-3">
                         <label for="gender" class="form-label">Jenis Kelamin</label>
-                        <select class="form-select" id="gender" name="jenis_kelamin" required="">
+                        <select class="form-select" id="gender" name="jenis_kelamin" required>
                             <option value="">-- Pilih Jenis Kelamin --</option>
                             <option value="laki-laki">Laki Laki</option>
                             <option value="perempuan">Perempuan</option>
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="nomor-hp" class="form-label">Nomor HP/Whatsapp</label>
-                        <input type="number" class="form-control" id="nomor-hp" name="nomor_hp" placeholder="085678910"
-                            required="">
+                        <input type="number" class="form-control" id="nomor-hp" name="nomor_hp" required>
                     </div>
-
                     <div class="mb-3">
-                        <label for="foto" class="form-label">Dokumen</label>
+                        <label for="dokumen" class="form-label">Dokumen</label>
                         <input class="form-control" type="file" id="dokumen" name="dokumen">
                     </div>
-
-                    <input type="hidden" name="status" value="menunggu">
-                    <div class="centerdiv">
-                        <div class="text-center">
-                            <button class="btn btn-primary" type="submit">Kirim</button>
-                            <button class="btn btn-secondary" type="submit">Kembali</button>
-                        </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit">Kirim</button>
+                        <button class="btn btn-secondary" type="button"
+                            onclick="window.history.back();">Kembali</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
