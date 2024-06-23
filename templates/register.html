@@ -79,7 +79,7 @@
           data: { email_give: email, pw_give: password, name_give: name, confirmPass_give: confirmPass },
           success: function (response) {
             if (response["result"] === "error") {
-              $("#errEmail").addClass("input-error").text("Email Tidak Ditemukan!");
+              $("#errEmail").addClass("input-error").text("Email Sudah Ada!");
             } else {
               $("#errEmail").removeClass("input-error");
               Swal.fire({
